@@ -421,7 +421,7 @@ function onSubmit(e) {
 */
 
 
-
+/*
 const btn= document.querySelector('#my-form');
 btn.addEventListener('submit',localstorage);
 function localstorage()
@@ -436,6 +436,21 @@ function localstorage()
 
   console.log(localStorage.getItem('name'));
   console.log(localStorage.getItem('email'));
+}
+*/
+const btn= document.querySelector('#my-form');
+btn.addEventListener('submit',localstorage);
+function localstorage(e)
+{
+  e.preventDefault();
+  const name1= document.getElementById('name').value;
+  const email= document.getElementById('email').value;
+  //console.log(name1, email);
+
+  const vari=  {name:'name1',email:'email'};
+  localStorage.setItem('obj', JSON.stringify(vari));
+
+  console.log (JSON.parse(localStorage.getItem('obj')));
 }
 
 
