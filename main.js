@@ -78,7 +78,9 @@ function showUser(vari) {
   parentEle.appendChild(child);
   button.onclick=function(e) {
     parentEle.removeChild(child);
+    parentEle.removeChild(button);
     localStorage.removeItem(vari.email);
+
   }
 }
 
