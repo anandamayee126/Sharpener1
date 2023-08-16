@@ -69,18 +69,46 @@ function localstorage(e)
 function showUser(vari) {
   const parentEle= document.querySelector('.items');
   const child= document.createElement('li');
-  const text= document.createTextNode(vari.name1+" : "+vari.email);
-  const button= document.createElement('button');
-  button.className='btn btn-info btn-sm float-right delete';
-  button.textContent='Delete';
+  var text= document.createTextNode(vari.name1+" : "+vari.email);
+  const button_del= document.createElement('button');
+  const button_edit= document.createElement('button');
+  button_edit.className='btn btn-info btn-sm float-right edit';
+  button_edit.textContent='Edit';
+  button_del.className='btn btn-info btn-sm float-right delete';
+  button_del.textContent='Delete';
   child.appendChild(text);
-  parentEle.appendChild(button);
+  parentEle.appendChild(button_del);
+  parentEle.appendChild(button_edit);
   parentEle.appendChild(child);
-  button.onclick=function(e) {
+
+
+  button_del.onclick=function(e) {
+   
     parentEle.removeChild(child);
     parentEle.removeChild(button);
     localStorage.removeItem(vari.email);
 
+  }
+  button_edit.onclick=function(e)
+  {
+    
+    if(e.target.classList.contains('edit')){
+      let elem = e.target.parentNode.parentNode
+      let index = elem.textContent[0] -1
+      const users =JSON.parse(localStorage.getItem(''))
+      let ul = document.getElementById('users')
+      document.getElementById('name').value = users[index].name
+      document.getElementById('email').value = users[index].email
+      if(users.length === 1 && index === 0){
+          localStorage.removeItem('users')
+          ul.removeChild(e.target.parentNode.parentNode)
+      }
+      else{
+          users.splice(index ,1)
+          localStorage.setItem('users' , JSON.stringify(users))
+          renderElements()
+      }
+   }
   }
 }
 
